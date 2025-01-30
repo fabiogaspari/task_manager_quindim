@@ -1,0 +1,128 @@
+@import 'tailwindcss';
+@import './base.css';
+
+#app {
+}
+
+@theme {
+  --color-primary-001: oklch(85% 0.2 85);
+  --color-primary-002: oklch(80% 0.25 85);
+  --color-primary-main-003: oklch(75% 0.3 85);
+  --color-primary-004: oklch(70% 0.35 85);
+  --color-primary-005: oklch(65% 0.4 85);
+  --color-primary-006: oklch(60% 0.45 85);
+  --color-primary-007: oklch(55% 0.5 85);
+  --color-primary-008: oklch(50% 0.55 85);
+  --color-primary-009: oklch(45% 0.6 85);
+  --color-primary-010: oklch(40% 0.65 85);
+
+  --color-secondary-001: oklch(90% 0.15 200);
+  --color-secondary-002: oklch(85% 0.2 200);
+  --color-secondary-003: oklch(80% 0.25 200);
+  --color-secondary-004: oklch(75% 0.3 200);
+  --color-secondary-main-005: oklch(70% 0.35 200);
+  --color-secondary-006: oklch(65% 0.4 200);
+  --color-secondary-007: oklch(60% 0.45 200);
+  --color-secondary-008: oklch(55% 0.5 200);
+  --color-secondary-009: oklch(50% 0.55 200);
+  --color-secondary-010: oklch(45% 0.6 200);
+
+  --color-tertiary-001: oklch(90% 0.15 160);
+  --color-tertiary-002: oklch(85% 0.2 160);
+  --color-tertiary-003: oklch(80% 0.25 160);
+  --color-tertiary-004: oklch(75% 0.3 160);
+  --color-tertiary-005: oklch(70% 0.35 160);
+  --color-tertiary-main-006: oklch(65% 0.4 160);
+  --color-tertiary-007: oklch(60% 0.45 160);
+  --color-tertiary-008: oklch(55% 0.5 160);
+  --color-tertiary-009: oklch(50% 0.55 160);
+  --color-tertiary-010: oklch(45% 0.6 160);
+
+  --color-auxiliary-white-001: oklch(100% 0 0);
+  --color-auxiliary-002: oklch(90% 0.05 0);
+  --color-auxiliary-003: oklch(80% 0.1 0);
+  --color-auxiliary-004: oklch(70% 0.15 0);
+  --color-auxiliary-005: oklch(60% 0.2 0);
+  --color-auxiliary-006: oklch(50% 0.25 0);
+  --color-auxiliary-007: oklch(40% 0.3 0);
+  --color-auxiliary-main-008: oklch(30% 0.35 0);
+  --color-auxiliary-009: oklch(20% 0.4 0);
+  --color-auxiliary-010: oklch(10% 0.45 0);
+
+  --color-input-common-background-001: oklch(100% 0 0);
+
+  --color-danger-main-002: oklch(70% 0.35 25);
+  --color-danger-001: oklch(80% 0.3 25);
+  --color-danger-003: oklch(65% 0.4 25);
+  --color-danger-004: oklch(60% 0.45 25);
+  --color-danger-006: oklch(50% 0.5 25);
+  --color-danger-007: oklch(45% 0.55 25);
+  --color-danger-008: oklch(40% 0.6 25);
+  --color-danger-009: oklch(35% 0.65 25);
+  --color-danger-010: oklch(30% 0.7 25);
+}
+
+.ubuntu-light {
+  font-family: 'Ubuntu', serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.ubuntu-regular {
+  font-family: 'Ubuntu', serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.ubuntu-medium {
+  font-family: 'Ubuntu', serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.ubuntu-bold {
+  font-family: 'Ubuntu', serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.ubuntu-light-italic {
+  font-family: 'Ubuntu', serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.ubuntu-regular-italic {
+  font-family: 'Ubuntu', serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.ubuntu-medium-italic {
+  font-family: 'Ubuntu', serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.ubuntu-bold-italic {
+  font-family: 'Ubuntu', serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+a,
+.green {
+  text-decoration: none;
+  color: hsla(160, 100%, 37%, 1);
+  transition: 0.4s;
+  padding: 3px;
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
+  }
+}
+
+@theme {
+}
