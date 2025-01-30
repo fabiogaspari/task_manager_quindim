@@ -5,61 +5,58 @@
 }
 
 @theme {
-  --color-primary-001: oklch(85% 0.2 85);
-  --color-primary-002: oklch(80% 0.25 85);
-  --color-primary-main-003: oklch(75% 0.3 85);
-  --color-primary-004: oklch(70% 0.35 85);
-  --color-primary-005: oklch(65% 0.4 85);
-  --color-primary-006: oklch(60% 0.45 85);
-  --color-primary-007: oklch(55% 0.5 85);
-  --color-primary-008: oklch(50% 0.55 85);
-  --color-primary-009: oklch(45% 0.6 85);
-  --color-primary-010: oklch(40% 0.65 85);
+  --color-primary-001: #ffd05f;
+  --color-primary-002: #ffc437;
+  --color-primary-main-003: #fdb813;
+  --color-primary-004: #f3b216;
+  --color-primary-005: #e8ad22;
+  --color-primary-006: #d6a32a;
+  --color-primary-007: #c79b31;
+  --color-primary-008: #b48e36;
+  --color-primary-009: #a38338;
+  --color-primary-010: #7e6937;
+  --color-secondary-001: #63e0ff;
+  --color-secondary-002: #39d8ff;
+  --color-secondary-003: #02c6f6;
+  --color-secondary-004: #02bae8;
+  --color-secondary-main-005: #00a6cf;
+  --color-secondary-006: #0e9cbf;
+  --color-secondary-007: #188ba8;
+  --color-secondary-008: #1e7e96;
+  --color-secondary-009: #246e81;
+  --color-secondary-010: #28606d;
+  --color-tertiary-001: #7dffd4;
+  --color-tertiary-002: #31ffbb;
+  --color-tertiary-003: #08f5a7;
+  --color-tertiary-004: #0edc98;
+  --color-tertiary-005: #12c087;
+  --color-tertiary-main-006: #18aa7a;
+  --color-tertiary-007: #24946f;
+  --color-tertiary-008: #2f8166;
+  --color-tertiary-009: #35735e;
+  --color-tertiary-010: #346454;
+  --color-auxiliary-white-001: #ffffff;
+  --color-auxiliary-002: #e3e3e3;
+  --color-auxiliary-003: #c7c7c7;
+  --color-auxiliary-004: #adadad;
+  --color-auxiliary-005: #949494;
+  --color-auxiliary-006: #797979;
+  --color-auxiliary-007: #626161;
+  --color-auxiliary-main-008: #404040;
+  --color-auxiliary-009: #292929;
+  --color-auxiliary-010: #141414;
+  --color-input-common-background-001: #ffffff;
+  --color-danger-main-002: #f27059;
+  --color-danger-001: #ffa190;
+  --color-danger-003: #e95439;
+  --color-danger-004: #d03216;
+  --color-danger-006: #96220d;
+  --color-danger-007: #762719;
+  --color-danger-008: #672115;
+  --color-danger-009: #4b1d15;
+  --color-danger-010: #340f09;
 
-  --color-secondary-001: oklch(90% 0.15 200);
-  --color-secondary-002: oklch(85% 0.2 200);
-  --color-secondary-003: oklch(80% 0.25 200);
-  --color-secondary-004: oklch(75% 0.3 200);
-  --color-secondary-main-005: oklch(70% 0.35 200);
-  --color-secondary-006: oklch(65% 0.4 200);
-  --color-secondary-007: oklch(60% 0.45 200);
-  --color-secondary-008: oklch(55% 0.5 200);
-  --color-secondary-009: oklch(50% 0.55 200);
-  --color-secondary-010: oklch(45% 0.6 200);
-
-  --color-tertiary-001: oklch(90% 0.15 160);
-  --color-tertiary-002: oklch(85% 0.2 160);
-  --color-tertiary-003: oklch(80% 0.25 160);
-  --color-tertiary-004: oklch(75% 0.3 160);
-  --color-tertiary-005: oklch(70% 0.35 160);
-  --color-tertiary-main-006: oklch(65% 0.4 160);
-  --color-tertiary-007: oklch(60% 0.45 160);
-  --color-tertiary-008: oklch(55% 0.5 160);
-  --color-tertiary-009: oklch(50% 0.55 160);
-  --color-tertiary-010: oklch(45% 0.6 160);
-
-  --color-auxiliary-white-001: oklch(100% 0 0);
-  --color-auxiliary-002: oklch(90% 0.05 0);
-  --color-auxiliary-003: oklch(80% 0.1 0);
-  --color-auxiliary-004: oklch(70% 0.15 0);
-  --color-auxiliary-005: oklch(60% 0.2 0);
-  --color-auxiliary-006: oklch(50% 0.25 0);
-  --color-auxiliary-007: oklch(40% 0.3 0);
-  --color-auxiliary-main-008: oklch(30% 0.35 0);
-  --color-auxiliary-009: oklch(20% 0.4 0);
-  --color-auxiliary-010: oklch(10% 0.45 0);
-
-  --color-input-common-background-001: oklch(100% 0 0);
-
-  --color-danger-main-002: oklch(70% 0.35 25);
-  --color-danger-001: oklch(80% 0.3 25);
-  --color-danger-003: oklch(65% 0.4 25);
-  --color-danger-004: oklch(60% 0.45 25);
-  --color-danger-006: oklch(50% 0.5 25);
-  --color-danger-007: oklch(45% 0.55 25);
-  --color-danger-008: oklch(40% 0.6 25);
-  --color-danger-009: oklch(35% 0.65 25);
-  --color-danger-010: oklch(30% 0.7 25);
+  --radius-default: 10px;
 }
 
 .ubuntu-light {
@@ -108,21 +105,4 @@
   font-family: 'Ubuntu', serif;
   font-weight: 700;
   font-style: italic;
-}
-
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
-}
-
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
-}
-
-@theme {
 }
