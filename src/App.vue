@@ -1,8 +1,18 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import HeadQuindim from '@/components/base/HeadQuindim.vue';
+import FooterQuindim from '@/components/base/FooterQuindim.vue';
+import BodyQuindim from '@/components/base/BodyQuindim.vue';
+</script>
 
 <template>
-    <div class="w-screen bg-blue-500 p-4 top-0 left-0">
-        Esta div está no topo da página.
+    <div class="flex flex-col h-screen justify-between overflow-x-hidden">
+        <HeadQuindim></HeadQuindim>
+
+        <BodyQuindim>
+            <router-view />
+        </BodyQuindim>
+
+        <FooterQuindim></FooterQuindim>
     </div>
 </template>
 
