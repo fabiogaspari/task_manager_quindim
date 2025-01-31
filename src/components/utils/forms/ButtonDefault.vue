@@ -14,7 +14,7 @@ function execClick() {
 </script>
 
 <template>
-    <button :class="`inline-flex items-center justify-center px-4 py-2 rounded-lg font-medium transition duration-200 default-button
+    <button :class="`inline-flex items-center justify-center px-4 py-2 rounded-default font-medium transition duration-200 default-button
            ${props.disabled ? 'bg-auxiliary-002 cursor-not-allowed' : 'cursor-pointer'} 
            ${props.clazz || 'bg-secondary-009 hover:bg-secondary-010'}`" :style="style" @click="execClick()"
         :disabled="props.disabled">
