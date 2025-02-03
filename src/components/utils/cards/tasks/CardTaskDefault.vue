@@ -34,7 +34,7 @@ function check() { }
         </div>
         <div class="flex justify-between py-5">
             <BadgeDefault :clazz="task.status.status_color + ' border-1 border-white ' + task.status.status_color_font">
-                {{ task.status.name }}
+                <span class="ubuntu-bold">{{ task.status.name }}</span>
             </BadgeDefault>
             <BadgeDefault clazz="bg-white text-black border-1 border-primary-008" v-if="task.expiration_date">
                 <span>até&nbsp;</span>
