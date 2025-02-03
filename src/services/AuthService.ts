@@ -29,8 +29,7 @@ export default class AuthService {
 
   static async logout(): Promise<void> {
     try {
-      await api.delete<DefaultResponse>('/auth/users/logout')
-      localStorage.removeItem('token')
+      await api.delete<void>('/auth/users/logout')
     } catch (error) {
       console.error('Erro ao atualizar usuário:', error)
       throw error
