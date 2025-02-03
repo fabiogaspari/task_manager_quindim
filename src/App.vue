@@ -5,7 +5,7 @@ import BodyQuindim from '@/components/base/BodyQuindim.vue';
 </script>
 
 <template>
-    <div class="flex flex-col h-screen justify-between overflow-x-hidden">
+    <div class="flex flex-col min-h-screen justify-between overflow-x-hidden">
         <HeadQuindim></HeadQuindim>
 
         <BodyQuindim>
