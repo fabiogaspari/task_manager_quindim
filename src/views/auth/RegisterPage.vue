@@ -47,7 +47,7 @@ const save = async () => {
                     <q-input class="bg-white rounded-default" v-model="email" type="text" filled label="Email" />
                     <q-input class="bg-white rounded-default" v-model="password" type="password" filled
                         label="Password" />
-                    <div class="flex justify-between items-end">
+                    <div class="flex justify-between float-right">
                         <ButtonDefault clazz="bg-tertiary-003 hover:bg-tertiary-005 ubuntu-bold" @click="save()">
                             <span class="ubuntu-bold text-auxiliary-main-008 md:text-xl text-sm w-">Registrar</span>
                         </ButtonDefault>

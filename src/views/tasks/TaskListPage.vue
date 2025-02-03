@@ -6,8 +6,36 @@ import { onMounted, ref } from 'vue';
 import CardTaskDefault from '@/components/utils/cards/tasks/CardTaskDefault.vue';
 import router from '@/router';
 import ResponseUtil from '@/utils/ResponseUtil';
+import ConfirmDefaultModal from '@/components/utils/modals/ConfirmDefaultModal.vue';
 
 const listTasks = ref<Task[]>([]);
+const task = ref<Task | null>(null)
+
+const showConfirm = ref(false)
+const dialogData = ref<{
+    onConfirm?: () => void;
+    onCancel?: () => void;
+} | null>(null);
+
+const showDialog = (): Promise<boolean> => {
+    return new Promise<boolean>((resolve) => {
+        dialogData.value = {
+            onConfirm: () => resolve(true),
+            onCancel: () => resolve(false),
+        };
+    });
+};
+
+const confirmAction = async () => {
+    const result = await showDialog();
+    if (result) {
+        TaskService.delete(task.value?._id!).then((res) => {
+            ResponseUtil.treatResponse(res)
+            getAll()
+        })
+    }
+    showConfirm.value = false
+};
 
 const getAll = async () => {
     TaskService.getAll().then((res) => {
@@ -20,18 +48,26 @@ onMounted(() => {
 });
 
 const goto: Function = (page: String, id: string) => {
-    router.push({ name: page.toString(), params: { id: id ?? null } })
+    if (id) {
+        router.push({ name: page.toString(), params: { id: id ?? null } })
+        return
+    }
+    router.push({ name: page.toString() })
 };
-const remove: Function = (task: Task) => {
-    TaskService.delete(task._id!).then((res) => {
-        ResponseUtil.treatResponse(res)
-        getAll()
-    })
-};
+
+const remove: Function = async (received: Task) => {
+    task.value = received
+    showConfirm.value = true
+    await confirmAction()
+}
 </script>
 
 <template>
     <div class="flex flex-grow">
+        <ConfirmDefaultModal v-if="dialogData" :on-confirm="dialogData.onConfirm" :on-cancel="dialogData.onCancel"
+            :show="showConfirm">
+            <span>Tem certeza que deseja excluir essa tarefa?</span>
+        </ConfirmDefaultModal>
         <div class="flex justify-center content-start w-full h-full q-gutter-sm pb-20">
             <div class="flex justify-between w-full">
                 <span class="text-white ubuntu-bold md:text-5xl text-xl">Tarefas</span>

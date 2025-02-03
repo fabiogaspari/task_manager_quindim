@@ -2,7 +2,6 @@
 import CardDefault from '@/components/utils/cards/CardDefault.vue';
 import ButtonDefault from '@/components/utils/forms/ButtonDefault.vue';
 import { onMounted, ref } from 'vue';
-import ResponseUtil from '@/utils/ResponseUtil';
 import status_colors from '@/models/fixed/status_colors'
 import status_color_fonts from '@/models/fixed/status_color_fonts'
 import TaskStatusService from '@/services/TaskStatusService';

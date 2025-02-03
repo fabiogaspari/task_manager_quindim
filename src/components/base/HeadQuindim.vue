@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import router from "@/router";
 import { useAuthStore } from "@/stores/authStore";
+import ButtonDefault from "../utils/forms/ButtonDefault.vue";
+import { useRouteStore } from "@/stores/routeStore";
 
 const authStore = useAuthStore()
+const routeStore = useRouteStore()
 
 </script>
 <template>
@@ -28,8 +31,18 @@ const authStore = useAuthStore()
             </q-btn>
         </div>
         <div class="flex justify-between" v-else>
-            <div class="flex justify-center" v-if="authStore.isAuthenticated">
-                <img src="@/assets/logo_quindim.png" alt="Logo Quindim" id="logomarca" />
+            <img src="@/assets/logo_quindim.png" alt="Logo Quindim" id="logomarca" />
+            <div v-if="routeStore.currentRoute == 'register'">
+                <ButtonDefault clazz="bg-tertiary-003 hover:bg-tertiary-005 ubuntu-bold"
+                    @click="router.push({ name: 'login' })">
+                    <span class="ubuntu-bold text-auxiliary-main-008 md:text-xl text-sm w-20">Login</span>
+                </ButtonDefault>
+            </div>
+            <div v-else-if="routeStore.currentRoute == 'login'">
+                <ButtonDefault clazz="bg-tertiary-003 hover:bg-tertiary-005 ubuntu-bold"
+                    @click="router.push({ name: 'register' })">
+                    <span class="ubuntu-bold text-auxiliary-main-008 md:text-xl text-sm w-30">Registrar-se</span>
+                </ButtonDefault>
             </div>
         </div>
     </div>

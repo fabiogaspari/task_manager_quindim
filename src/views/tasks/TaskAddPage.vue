@@ -51,7 +51,7 @@ const save = async () => {
     <div class="flex flex-grow">
         <div class="flex justify-center content-start w-full h-full q-gutter-sm">
             <div class="flex justify-between w-full">
-                <span class="text-white ubuntu-bold md:text-5xl text-xl">Adicionar Tarefas</span>
+                <span class="text-white ubuntu-bold md:text-4xl text-xl">Adicionar Tarefas</span>
                 <ButtonDefault clazz="bg-tertiary-003 hover:bg-tertiary-005 ubuntu-bold" @click="save()">
                     <span class="ubuntu-bold text-auxiliary-main-008 md:text-lg text-sm">Salvar</span>
                 </ButtonDefault>

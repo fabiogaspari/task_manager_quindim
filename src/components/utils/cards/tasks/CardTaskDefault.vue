@@ -37,7 +37,7 @@ function check() { }
                 <span class="ubuntu-bold">{{ task.status.name }}</span>
             </BadgeDefault>
             <BadgeDefault clazz="bg-white text-black border-1 border-primary-008" v-if="task.expiration_date">
-                <span>até&nbsp;</span>
+                <span class="ubuntu-bold">até&nbsp;</span>
                 {{ DateUtil.formatDate(task.expiration_date) }}
             </BadgeDefault>
             <BadgeDefault clazz="bg-white text-black border-1 border-primary-008" v-else>
