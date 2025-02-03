@@ -7,7 +7,7 @@ const authStore = useAuthStore()
 </script>
 <template>
 
-    <div class="w-screen bg-white p-4 top-0 left-0">
+    <div class="w-screen bg-white p-4 md:py-4 md:px-10 top-0 left-0">
         <div class="flex justify-between" v-if="authStore.isAuthenticated">
             <img src="@/assets/logo_quindim.png" alt="Logo Quindim" id="logomarca" />
             <q-btn color="primary" label="Menu" style="background: #28606d;">
