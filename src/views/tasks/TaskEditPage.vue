@@ -7,7 +7,6 @@ import Task from '@/models/Task';
 import { onMounted, ref } from 'vue';
 import TaskStatus from '@/models/TaskStatus';
 import { toRaw } from 'vue';
-import ResponseUtil from '@/utils/ResponseUtil';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
@@ -21,6 +20,7 @@ const expirationDate = ref<String | null>(null);
 
 onMounted(async () => {
     try {
+        listStatus.value = await taskStatusStore.fetchTaskStatuses()
         const response = await TaskService.get(id.toString())
         task.value = response
 
