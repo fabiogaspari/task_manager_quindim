@@ -2,7 +2,7 @@ import api from '@/services/api'
 import type User from '@/models/User'
 
 export default class UserService {
-  static async getUserById(userId: string): Promise<User> {
+  static async get(userId: string): Promise<User> {
     try {
       const response = await api.get<User>(`/users/${userId}`)
       return response.data
@@ -12,9 +12,9 @@ export default class UserService {
     }
   }
 
-  static async createUser(userData: Partial<User>): Promise<User> {
+  static async create(userData: Partial<User>): Promise<User> {
     try {
-      const response = await api.post<User>('/users', userData)
+      const response = await api.post<User>('/users/create', userData)
       return response.data
     } catch (error) {
       console.error('Erro ao criar usuário:', error)
@@ -22,7 +22,7 @@ export default class UserService {
     }
   }
 
-  static async updateUser(userId: string, userData: Partial<User>): Promise<User> {
+  static async update(userId: string, userData: Partial<User>): Promise<User> {
     try {
       const response = await api.put<User>(`/users/${userId}`, userData)
       return response.data
@@ -32,7 +32,7 @@ export default class UserService {
     }
   }
 
-  static async deleteUser(userId: string): Promise<void> {
+  static async delete(userId: string): Promise<void> {
     try {
       await api.delete(`/users/${userId}`)
     } catch (error) {

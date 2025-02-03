@@ -30,8 +30,11 @@ const login = async () => {
     <div class="flex justify-center items-center w-full h-full">
         <div class="items-center justify-center text-center">
             <div class="flex items-center justify-center text-center">
-                <span class="text-white ubuntu-bold md:text-5xl text-xl">Gerenciador de Tarefas e
-                    Usuários</span>
+                <div class="q-gutter-md flex flex-col">
+                    <span class="text-white ubuntu-bold md:text-5xl text-2xl">Login</span>
+                    <span class="text-white ubuntu-bold md:text-3xl text-xl">Gerenciador de Tarefas e
+                        Usuários</span>
+                </div>
             </div>
             <div class="flex justify-center w-full">
                 <img src="@/assets/gif-animado-mascote-quindim.gif" alt="Mascote Quindim" id="mascote" />

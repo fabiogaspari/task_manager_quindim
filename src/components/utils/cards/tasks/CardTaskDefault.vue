@@ -28,20 +28,20 @@ function check() { }
            ${props.disabled ? 'bg-auxiliary-002' : ''} 
            ${props.clazz || 'bg-auxiliary-002'}`" :style="style" :disabled="props.disabled">
         <div class="flex items-center" style="flex-wrap: nowrap;">
-            <div style="margin-left: -8px;">
-                <q-checkbox v-model="selection" color="text-white" />
-            </div>
             <div class="text-secondary-010 ubuntu-bold text-base">
                 {{ task.title }}
             </div>
         </div>
         <div class="flex justify-between py-5">
-            <BadgeDefault :clazz="task.status.bg_color + ' border-1 border-white ' + task.status.font_color">
+            <BadgeDefault :clazz="task.status.status_color + ' border-1 border-white ' + task.status.status_color_font">
                 {{ task.status.name }}
             </BadgeDefault>
             <BadgeDefault clazz="bg-white text-black border-1 border-primary-008" v-if="task.expiration_date">
                 <span>até&nbsp;</span>
                 {{ DateUtil.formatDate(task.expiration_date) }}
+            </BadgeDefault>
+            <BadgeDefault clazz="bg-white text-black border-1 border-primary-008" v-else>
+                <span>sem data</span>
             </BadgeDefault>
         </div>
         <div>

@@ -1,9 +1,9 @@
 export default class TaskStatus {
   constructor(
     public name: string,
+    public status_color: string,
+    public status_color_font: string,
     public description: string,
-    public bg_color: string,
-    public font_color: string,
-    public _id?: number,
+    public _id?: string,
   ) {}
 }

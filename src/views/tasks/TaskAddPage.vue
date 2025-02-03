@@ -12,7 +12,7 @@ import ResponseUtil from '@/utils/ResponseUtil';
 const taskStatusStore = useTaskStatusStore();
 const title = ref<string>('');
 const status = ref<TaskStatus | null>(null);
-const expirationDate = ref<String>(new Date().toDateString());
+const expirationDate = ref<String | null>(null);
 const listStatus = ref<TaskStatus[]>([]);
 
 onMounted(() => {
@@ -32,11 +32,10 @@ const save = async () => {
     const task: Task = new Task(
         title.value,
         statusValue,
-        expirationDate.value.split("/").join("-")
+        expirationDate.value ? expirationDate.value.split("/").join("-") : null
     );
 
     const response = await TaskService.create(task);
-    ResponseUtil.treatResponse(response)
 };
 </script>
 

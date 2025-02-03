@@ -1,12 +1,40 @@
 <script setup lang="ts">
 import ButtonDefault from '@/components/utils/forms/ButtonDefault.vue';
+import TaskService from '@/services/TaskService';
+import Task from '@/models/Task';
+import { onMounted, ref } from 'vue';
 import CardTaskDefault from '@/components/utils/cards/tasks/CardTaskDefault.vue';
+import router from '@/router';
+import ResponseUtil from '@/utils/ResponseUtil';
 import CardTaskStatusDefault from '@/components/utils/cards/task_status/CardTaskStatusDefault.vue';
+import type TaskStatus from '@/models/TaskStatus';
+import TaskStatusService from '@/services/TaskStatusService';
 
-function teste(): void {
-    return console.log('teste');
+const listTaskStatus = ref<TaskStatus[]>([]);
+
+const getAll = async () => {
+    TaskStatusService.getAll().then((res) => {
+        listTaskStatus.value = res
+    })
 }
 
+onMounted(() => {
+    getAll()
+});
+
+const goto: Function = (page: String, id: string) => {
+    if (id) {
+        router.push({ name: page.toString(), params: { id: id ?? null } })
+        return
+    }
+    router.push({ name: page.toString() })
+};
+const remove: Function = (taskStatus: TaskStatus) => {
+    TaskStatusService.delete(taskStatus._id!).then((res) => {
+        ResponseUtil.treatResponse(res)
+        getAll()
+    })
+};
 </script>
 
 <template>
@@ -14,11 +42,12 @@ function teste(): void {
         <div class="flex justify-center content-start w-full h-full q-gutter-sm pb-20">
             <div class="flex justify-between w-full">
                 <span class="text-white ubuntu-bold md:text-5xl text-xl">Status das Tarefas</span>
-                <ButtonDefault clazz="bg-tertiary-003 hover:bg-tertiary-005 ubuntu-bold" :btnonclick="teste">
+                <ButtonDefault clazz="bg-tertiary-003 hover:bg-tertiary-005 ubuntu-bold"
+                    @click="goto('task-status.create')">
                     <span class="ubuntu-bold text-auxiliary-main-008 md:text-lg text-sm">Adicionar</span>
                 </ButtonDefault>
             </div>
-            <div class="w-full h-full bg-primary-001 p-4 rounded-default grid gap-y-4">
+            <div class="w-full bg-primary-001 p-4 rounded-default grid gap-y-4">
                 <!-- ##################################################################################### -->
                 <!-- ################################## COMENTARIO IMPORTANTE ############################ -->
                 <!-- ##################################################################################### -->
@@ -42,61 +71,19 @@ function teste(): void {
                     </q-card-actions>
                 </q-card> -->
 
-                <CardTaskStatusDefault
-                    :status="{ id: 1, name: 'teste', description: 'teste', bg_color: 'bg-auxiliary-005', font_color: 'text-white' }">
-                    <div class="flex justify-between">
-                        <ButtonDefault :btnonclick="teste" clazz="text-auxiliary-white-001 bg-secondary-009">
-                            <span class="ubuntu-bold md:text-xl text-sm w-20">Editar</span>
-                        </ButtonDefault>
-                        <ButtonDefault :btnonclick="teste" clazz="text-auxiliary-white-001 bg-danger-006">
-                            <span class="ubuntu-bold  md:text-xl text-sm w-20">Excluir</span>
-                        </ButtonDefault>
-                    </div>
-                </CardTaskStatusDefault>
-                <CardTaskStatusDefault
-                    :status="{ id: 1, name: 'teste', description: 'teste', bg_color: 'bg-danger-005', font_color: 'text-white' }">
-                    <div class="flex justify-between">
-                        <ButtonDefault :btnonclick="teste" clazz="text-auxiliary-white-001 bg-secondary-009">
-                            <span class="ubuntu-bold md:text-xl text-sm w-20">Editar</span>
-                        </ButtonDefault>
-                        <ButtonDefault :btnonclick="teste" clazz="text-auxiliary-white-001 bg-danger-006">
-                            <span class="ubuntu-bold  md:text-xl text-sm w-20">Excluir</span>
-                        </ButtonDefault>
-                    </div>
-                </CardTaskStatusDefault>
-                <CardTaskStatusDefault
-                    :status="{ id: 1, name: 'teste', description: 'teste', bg_color: 'bg-tertiary-005', font_color: 'text-black' }">
-                    <div class="flex justify-between">
-                        <ButtonDefault :btnonclick="teste" clazz="text-auxiliary-white-001 bg-secondary-009">
-                            <span class="ubuntu-bold md:text-xl text-sm w-20">Editar</span>
-                        </ButtonDefault>
-                        <ButtonDefault :btnonclick="teste" clazz="text-auxiliary-white-001 bg-danger-006">
-                            <span class="ubuntu-bold  md:text-xl text-sm w-20">Excluir</span>
-                        </ButtonDefault>
-                    </div>
-                </CardTaskStatusDefault>
-                <CardTaskStatusDefault
-                    :status="{ id: 1, name: 'teste', description: 'teste', bg_color: 'bg-tertiary-005', font_color: 'text-black' }">
-                    <div class="flex justify-between">
-                        <ButtonDefault :btnonclick="teste" clazz="text-auxiliary-white-001 bg-secondary-009">
-                            <span class="ubuntu-bold md:text-xl text-sm w-20">Editar</span>
-                        </ButtonDefault>
-                        <ButtonDefault :btnonclick="teste" clazz="text-auxiliary-white-001 bg-danger-006">
-                            <span class="ubuntu-bold  md:text-xl text-sm w-20">Excluir</span>
-                        </ButtonDefault>
-                    </div>
-                </CardTaskStatusDefault>
-                <CardTaskStatusDefault
-                    :status="{ id: 1, name: 'teste', description: 'teste', bg_color: 'bg-tertiary-005', font_color: 'text-black' }">
-                    <div class="flex justify-between">
-                        <ButtonDefault :btnonclick="teste" clazz="text-auxiliary-white-001 bg-secondary-009">
-                            <span class="ubuntu-bold md:text-xl text-sm w-20">Editar</span>
-                        </ButtonDefault>
-                        <ButtonDefault :btnonclick="teste" clazz="text-auxiliary-white-001 bg-danger-006">
-                            <span class="ubuntu-bold  md:text-xl text-sm w-20">Excluir</span>
-                        </ButtonDefault>
-                    </div>
-                </CardTaskStatusDefault>
+                <template v-for="taskStatus in listTaskStatus">
+                    <CardTaskStatusDefault :status="taskStatus">
+                        <div class="flex justify-between">
+                            <ButtonDefault @click="goto('task-status.edit', taskStatus._id)"
+                                clazz="text-auxiliary-white-001 bg-secondary-009">
+                                <span class="ubuntu-bold md:text-xl text-sm w-20">Editar</span>
+                            </ButtonDefault>
+                            <ButtonDefault @click="remove(taskStatus)" clazz="text-auxiliary-white-001 bg-danger-006">
+                                <span class="ubuntu-bold  md:text-xl text-sm w-20">Excluir</span>
+                            </ButtonDefault>
+                        </div>
+                    </CardTaskStatusDefault>
+                </template>
             </div>
         </div>
     </div>

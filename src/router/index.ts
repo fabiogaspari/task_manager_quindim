@@ -47,7 +47,7 @@ const router = createRouter({
       ],
     },
     {
-      path: '/task-status',
+      path: '/task_status',
       name: 'task-status',
       component: TaskStatusMainPage,
       children: [
@@ -76,7 +76,6 @@ router.beforeEach((to, from, next) => {
 
   if (to.meta.requiresAuth && (!authStore.isAuthenticated || authStore.isTokenExpired())) {
     router.push({ name: 'login' })
-    next()
   } else {
     next()
   }

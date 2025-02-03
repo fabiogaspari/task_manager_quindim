@@ -15,7 +15,7 @@ export const useTaskStatusStore = defineStore('task_status', {
       this.isLoading = true
 
       try {
-        const response = await TaskStatusService.all()
+        const response = await TaskStatusService.getAll()
 
         this.task_statuses = response
         return response
@@ -39,7 +39,7 @@ export const useTaskStatusStore = defineStore('task_status', {
     async updateTaskStatus(taskStatusId: any, newStatus: Partial<TaskStatus>) {
       try {
         const task_status: TaskStatus = await TaskStatusService.update(taskStatusId, newStatus)
-        const index = this.task_statuses.findIndex((t) => t.id === taskStatusId)
+        const index = this.task_statuses.findIndex((t) => t._id === taskStatusId)
         if (index !== -1) {
           this.task_statuses[index] = task_status
         }

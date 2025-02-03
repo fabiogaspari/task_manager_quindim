@@ -46,16 +46,17 @@
   --color-auxiliary-009: #292929;
   --color-auxiliary-010: #141414;
   --color-input-common-background-001: #ffffff;
-  --color-danger-main-002: #f27059;
-  --color-danger-001: #ffa190;
+  --color-danger-main-001: #f27059;
+  --color-danger-002: #e95439;
   --color-danger-003: #e95439;
-  --color-danger-004: #d03216;
-  --color-danger-005: #b22a12;
-  --color-danger-006: #96220d;
-  --color-danger-007: #762719;
-  --color-danger-008: #672115;
-  --color-danger-009: #4b1d15;
-  --color-danger-010: #340f09;
+  --color-danger-004: #cd5039;
+  --color-danger-005: #d03216;
+  --color-danger-006: #b22a12;
+  --color-danger-007: #96220d;
+  --color-danger-008: #762719;
+  --color-danger-009: #672115;
+  --color-danger-010: #4b1d15;
+  --color-danger-011: #340f09;
 
   --radius-default: 10px;
 }

@@ -17,7 +17,7 @@ const listStatus = ref<TaskStatus[]>([]);
 const task = ref<Task>()
 const title = ref('')
 const status = ref<TaskStatus | null>(null)
-const expirationDate = ref<Date>();
+const expirationDate = ref<String | null>(null);
 
 onMounted(async () => {
     try {
@@ -27,10 +27,8 @@ onMounted(async () => {
         if (task.value) {
             title.value = task.value.title
             status.value = task.value.status
-            expirationDate.value = new Date(task.value.expiration_date!)
+            expirationDate.value ? expirationDate.value.split("/").join("-") : null
         }
-        console.log(expirationDate.value);
-
     } catch (error) {
         console.error('Erro ao carregar tarefa:', error)
     }
@@ -48,7 +46,7 @@ const save = async () => {
         const updatedTask = new Task(
             title.value,
             statusValue,
-            expirationDate.value!.toString().split("/").join("-")
+            expirationDate.value ? expirationDate.value.split("/").join("-") : null
         )
 
         if (task.value?._id) {
@@ -56,8 +54,6 @@ const save = async () => {
         }
 
         const response = await TaskService.update(id.toString(), updatedTask)
-
-        ResponseUtil.treatResponse(response)
     } catch (error) {
         console.error('Erro ao salvar tarefa:', error)
     }

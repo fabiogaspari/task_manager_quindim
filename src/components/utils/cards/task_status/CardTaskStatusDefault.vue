@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import BadgeDefault from '@/components/utils/badges/BadgeDefault.vue';
-import type { TaskStatus } from '@/components/models/TaskStatus';
+import type TaskStatus from '@/models/TaskStatus';
 
 const selection = ref();
 
@@ -27,7 +27,8 @@ function check() { }
            ${props.disabled ? 'bg-auxiliary-002' : ''} 
            ${props.clazz || 'bg-auxiliary-002'}`" :style="style" :disabled="props.disabled">
         <div class="flex items-center" style="flex-wrap: nowrap;">
-            <BadgeDefault :clazz="status.bg_color + ' ubuntu-bold border-1 border-white ' + status.font_color">
+            <BadgeDefault
+                :clazz="status.status_color + ' ubuntu-bold border-1 border-white ' + status.status_color_font">
                 {{ status.name }}
             </BadgeDefault>
         </div>

@@ -1,71 +1,61 @@
 <script setup lang="ts">
 import CardDefault from '@/components/utils/cards/CardDefault.vue';
 import ButtonDefault from '@/components/utils/forms/ButtonDefault.vue';
-import { onMounted } from 'vue'
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
+import ResponseUtil from '@/utils/ResponseUtil';
+import status_colors from '@/models/fixed/status_colors'
+import status_color_fonts from '@/models/fixed/status_color_fonts'
+import TaskStatusService from '@/services/TaskStatusService';
+import { useRoute } from 'vue-router';
+import TaskStatus from '@/models/TaskStatus';
 
-import { useRoute } from 'vue-router'
+const route = useRoute();
+const id: string | string[] = route.params.id;
+const status = ref<TaskStatus>()
+const name = ref('')
+const status_color = ref({ id: '', desc: '' })
+const status_color_font = ref({ id: '', desc: '' })
+const description = ref('')
 
-const route = useRoute()
-const taskId = route.params.id
+onMounted(async () => {
+    try {
+        const response = await TaskStatusService.get(id.toString())
+        status.value = response
 
-const name = ref(null)
-const status_color = ref(null)
-const description = ref(null)
-const list_status_color = [
-    {
-        desc: 'verde',
-        id: 'bg-tertiary-00'
-    },
-    {
-        desc: 'amarelo',
-        id: 'bg-primary-002'
-    },
-    {
-        desc: 'vermelho',
-        id: 'bg-danger-003'
-    },
-    {
-        desc: 'cinza',
-        id: 'bg-auxiliary-005'
-    },
-    {
-        desc: 'preto',
-        id: 'bg-black'
+        const scf = status_color_fonts.find((scf) => scf.id == status.value?.status_color_font) ?? status_color_fonts[0]
+        const sc = status_colors.find((sc) => sc.id == status.value?.status_color) ?? status_colors[0]
+
+        if (status.value) {
+            name.value = status.value.name
+            status_color.value = sc
+            status_color_font.value = scf
+            description.value = status.value.description
+        }
+    } catch (error) {
+        console.error('Erro ao carregar tarefa:', error)
     }
-]
-const status_color_font = ref(null)
-const list_status_color_font = [
-    {
-        desc: 'verde',
-        id: 'text-tertiary-00'
-    },
-    {
-        desc: 'amarelo',
-        id: 'text-primary-002'
-    },
-    {
-        desc: 'vermelho',
-        id: 'text-danger-003'
-    },
-    {
-        desc: 'cinza',
-        id: 'text-auxiliary-005'
-    },
-    {
-        desc: 'preto',
-        id: 'text-black'
+});
+
+const save = async () => {
+    try {
+        const updatedTask = new TaskStatus(
+            name.value,
+            status_color.value.id,
+            status_color_font.value.id,
+            description.value
+        )
+
+        if (status.value?._id) {
+            updatedTask._id = status.value._id
+        }
+
+        const response = await TaskStatusService.update(id.toString(), updatedTask)
+
+
+    } catch (error) {
+        console.error('Erro ao salvar o status da tarefa:', error)
     }
-]
-
-onMounted(() => {
-    console.log('COLOCAR LOADING E BUSCAR NO BACK POR ID: ' + taskId)
-})
-
-function teste(): void {
-    return console.log('teste');
-}
-
+};
 </script>
 
 <template>
@@ -73,7 +63,7 @@ function teste(): void {
         <div class="flex justify-center content-start w-full h-full q-gutter-sm">
             <div class="flex justify-between w-full">
                 <span class="text-white ubuntu-bold md:text-5xl text-lg">Editar Status das Tarefas</span>
-                <ButtonDefault clazz="bg-tertiary-003 hover:bg-tertiary-005 ubuntu-bold" :btnonclick="teste">
+                <ButtonDefault clazz="bg-tertiary-003 hover:bg-tertiary-005 ubuntu-bold" @click="save()">
                     <span class="ubuntu-bold text-auxiliary-main-008 md:text-lg text-sm">Salvar</span>
                 </ButtonDefault>
             </div>
@@ -107,10 +97,10 @@ function teste(): void {
                                 <q-input class="bg-white rounded-default px-3" v-model="name" type="text"
                                     label="Nome" />
                                 <q-select class="bg-white rounded-default px-3" v-model="status_color"
-                                    :options="list_status_color" option-value="id" option-label="desc"
+                                    :options="status_colors" option-value="id" option-label="desc"
                                     label="Cor do Status" />
                                 <q-select class="bg-white rounded-default px-3" v-model="status_color_font"
-                                    :options="list_status_color_font" option-value="id" option-label="desc"
+                                    :options="status_color_fonts" option-value="id" option-label="desc"
                                     label="Cor da Fonte" />
                                 <q-input class="bg-white rounded-default px-3" v-model="description" type="textarea"
                                     label="Descrição" />
