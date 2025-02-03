@@ -1,5 +1,5 @@
 # Gerenciador de Tarefas Quindim (frontend)
-Para esse microserviço do frontend, foi utilizada a tecnologia Vue3 com Vite e Pinia.
+Para esse microserviço do frontend, foram utilizadas as tecnologias Vue3 com Vite e Pinia.
 
 # Para o bom funcionamento do projeto
 1. Necessário ter instalado na máquina o docker, docker compose e node (na versão 22)
