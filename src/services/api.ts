@@ -1,6 +1,8 @@
 import axios from 'axios'
 import { useAuthStore } from '@/stores/authStore'
 import router from '@/router'
+import { useRouter } from 'vue-router'
+import { useRouteStore } from '@/stores/routeStore'
 
 const BASE_URL = import.meta.env.VITE_BASE_URL
 
@@ -27,7 +29,11 @@ api.interceptors.response.use(
   (response) => response,
   async (error) => {
     const authStore = useAuthStore()
+    const routeStore = useRouteStore()
 
+    if (routeStore.currentRoute === 'login') {
+      return
+    }
     if (error.response && error.response.status === 401) {
       console.warn('Token expirado ou inválido.')
       authStore.logout()

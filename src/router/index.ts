@@ -10,6 +10,7 @@ import TaskStatusListPage from '@/views/task_status/TaskStatusListPage.vue'
 import TaskStatusEditPage from '@/views/task_status/TaskStatusEditPage.vue'
 import RegisterPage from '@/views/auth/RegisterPage.vue'
 import { useAuthStore } from '@/stores/authStore'
+import { useRouteStore } from '@/stores/routeStore'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -74,8 +75,12 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
 
+  const routeStore = useRouteStore()
+  routeStore.setCurrentRoute(to.name)
+
   if (to.meta.requiresAuth && (!authStore.isAuthenticated || authStore.isTokenExpired())) {
     router.push({ name: 'login' })
+    next()
   } else {
     next()
   }

@@ -4,6 +4,7 @@ import type LoginResponse from '@/models/responses/LoginResponse'
 import api from '@/services/api'
 import router from '@/router'
 import type { AxiosResponse } from 'axios'
+import type DefaultResponse from '@/models/responses/DefaultResponse'
 
 export default class AuthService {
   static async login(userData: LoginPayload): Promise<AxiosResponse<LoginResponse, any>> {
@@ -26,25 +27,12 @@ export default class AuthService {
     }
   }
 
-  static async logout(): Promise<User> {
+  static async logout(): Promise<void> {
     try {
-      const response = await api.put<User>('/auth/users/logout')
+      await api.delete<DefaultResponse>('/auth/users/logout')
       localStorage.removeItem('token')
-      return response.data
     } catch (error) {
       console.error('Erro ao atualizar usuário:', error)
-      throw error
-    }
-  }
-
-  static async verifyToken(): Promise<void> {
-    try {
-      const response = await api.get<String>('/auth/users/verify_token')
-      if (response.status == 401) {
-        localStorage.removeItem('token')
-      }
-    } catch (error) {
-      console.error('Erro ao verificar o token do usuário:', error)
       throw error
     }
   }

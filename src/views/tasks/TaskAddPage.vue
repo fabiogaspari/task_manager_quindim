@@ -48,7 +48,6 @@ const save = async () => {
     <ModalDefault v-model:alert="showInfo">
         <span>{{ message }}</span>
     </ModalDefault>
-    <LoadingDefault :isLoading="taskStatusStore.isLoading"></LoadingDefault>
     <div class="flex flex-grow">
         <div class="flex justify-center content-start w-full h-full q-gutter-sm">
             <div class="flex justify-between w-full">

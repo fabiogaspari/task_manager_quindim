@@ -21,7 +21,7 @@ const authStore = useAuthStore()
                                 Tarefa</q-item-section>
                         </q-item>
                         <q-item clickable v-close-popup>
-                            <q-item-section @click="authStore.logout()">Logout</q-item-section>
+                            <q-item-section @click.prevent="authStore.logout()">Logout</q-item-section>
                         </q-item>
                     </q-list>
                 </q-menu>
