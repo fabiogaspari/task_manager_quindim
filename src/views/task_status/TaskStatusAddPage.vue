@@ -5,6 +5,7 @@ import { ref } from 'vue';
 
 const name = ref(null)
 const status_color = ref(null)
+const description = ref(null)
 const list_status_color = [
     {
         desc: 'verde',
@@ -101,6 +102,8 @@ function teste(): void {
                                 <q-select class="bg-white rounded-default px-3" v-model="status_color_font"
                                     :options="list_status_color_font" option-value="id" option-label="desc"
                                     label="Cor da Fonte" />
+                                <q-input class="bg-white rounded-default px-3" v-model="description" type="textarea"
+                                    label="Descrição" />
                             </q-form>
                         </div>
                     </div>

@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { Task } from '@/components/models/Task';
+import Task from '@/models/Task';
 import BadgeDefault from '@/components/utils/badges/BadgeDefault.vue';
+import DateUtil from '@/utils/DateUtil';
 
 const selection = ref();
 
@@ -27,7 +28,7 @@ function check() { }
            ${props.disabled ? 'bg-auxiliary-002' : ''} 
            ${props.clazz || 'bg-auxiliary-002'}`" :style="style" :disabled="props.disabled">
         <div class="flex items-center" style="flex-wrap: nowrap;">
-            <div class="w-10">
+            <div style="margin-left: -8px;">
                 <q-checkbox v-model="selection" color="text-white" />
             </div>
             <div class="text-secondary-010 ubuntu-bold text-base">
@@ -38,10 +39,9 @@ function check() { }
             <BadgeDefault :clazz="task.status.bg_color + ' border-1 border-white ' + task.status.font_color">
                 {{ task.status.name }}
             </BadgeDefault>
-            <BadgeDefault clazz="bg-white text-black border-1 border-primary-008">
+            <BadgeDefault clazz="bg-white text-black border-1 border-primary-008" v-if="task.expiration_date">
                 <span>até&nbsp;</span>
-                {{ new
-                    Intl.DateTimeFormat('pt-BR').format(task.expiration_date) }}
+                {{ DateUtil.formatDate(task.expiration_date) }}
             </BadgeDefault>
         </div>
         <div>

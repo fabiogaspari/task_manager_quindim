@@ -9,11 +9,53 @@ import { useRoute } from 'vue-router'
 const route = useRoute()
 const taskId = route.params.id
 
-const title = ref(null)
-const status = ref(null)
-const expiration_date = ref(null)
-const list_status = [
-    'Google', 'Facebook', 'Twitter', 'Apple', 'Oracle'
+const name = ref(null)
+const status_color = ref(null)
+const description = ref(null)
+const list_status_color = [
+    {
+        desc: 'verde',
+        id: 'bg-tertiary-00'
+    },
+    {
+        desc: 'amarelo',
+        id: 'bg-primary-002'
+    },
+    {
+        desc: 'vermelho',
+        id: 'bg-danger-003'
+    },
+    {
+        desc: 'cinza',
+        id: 'bg-auxiliary-005'
+    },
+    {
+        desc: 'preto',
+        id: 'bg-black'
+    }
+]
+const status_color_font = ref(null)
+const list_status_color_font = [
+    {
+        desc: 'verde',
+        id: 'text-tertiary-00'
+    },
+    {
+        desc: 'amarelo',
+        id: 'text-primary-002'
+    },
+    {
+        desc: 'vermelho',
+        id: 'text-danger-003'
+    },
+    {
+        desc: 'cinza',
+        id: 'text-auxiliary-005'
+    },
+    {
+        desc: 'preto',
+        id: 'text-black'
+    }
 ]
 
 onMounted(() => {
@@ -30,7 +72,7 @@ function teste(): void {
     <div class="flex flex-grow">
         <div class="flex justify-center content-start w-full h-full q-gutter-sm">
             <div class="flex justify-between w-full">
-                <span class="text-white ubuntu-bold md:text-5xl text-xl">Editar Tarefas</span>
+                <span class="text-white ubuntu-bold md:text-5xl text-lg">Editar Status das Tarefas</span>
                 <ButtonDefault clazz="bg-tertiary-003 hover:bg-tertiary-005 ubuntu-bold" :btnonclick="teste">
                     <span class="ubuntu-bold text-auxiliary-main-008 md:text-lg text-sm">Salvar</span>
                 </ButtonDefault>
@@ -62,12 +104,16 @@ function teste(): void {
                     <div>
                         <div class="w-full">
                             <q-form class="q-gutter-md">
-                                <q-input class="bg-white rounded-default px-3" v-model="title" type="textarea"
-                                    label="Título" />
-                                <q-select class="bg-white rounded-default px-3" v-model="status" :options="list_status"
-                                    label="Status" />
-                                <q-input class="bg-white rounded-default px-3" v-model="expiration_date" type="date"
-                                    label="Data de Vencimento" />
+                                <q-input class="bg-white rounded-default px-3" v-model="name" type="text"
+                                    label="Nome" />
+                                <q-select class="bg-white rounded-default px-3" v-model="status_color"
+                                    :options="list_status_color" option-value="id" option-label="desc"
+                                    label="Cor do Status" />
+                                <q-select class="bg-white rounded-default px-3" v-model="status_color_font"
+                                    :options="list_status_color_font" option-value="id" option-label="desc"
+                                    label="Cor da Fonte" />
+                                <q-input class="bg-white rounded-default px-3" v-model="description" type="textarea"
+                                    label="Descrição" />
                             </q-form>
                         </div>
                     </div>

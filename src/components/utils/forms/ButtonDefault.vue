@@ -2,21 +2,21 @@
 interface Props {
     clazz?: string;
     style?: string;
-    btnonclick: Function;
+    onClick: Function;
     disabled?: boolean;
 }
 
 const props = defineProps<Props>();
 
 function execClick() {
-    props.btnonclick();
+    props.onClick();
 }
 </script>
 
 <template>
     <button :class="`inline-flex items-center justify-center px-4 py-2 rounded-default font-medium transition duration-200 default-button
            ${props.disabled ? 'bg-auxiliary-002 cursor-not-allowed' : 'cursor-pointer'} 
-           ${props.clazz || 'bg-secondary-009 hover:bg-secondary-010'}`" :style="style" @click="execClick()"
+           ${props.clazz || 'bg-secondary-009 hover:bg-secondary-010'}`" :style="style" @click="execClick"
         :disabled="props.disabled">
         <slot></slot>
     </button>

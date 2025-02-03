@@ -3,40 +3,26 @@ import { useQuasar } from 'quasar';
 import { ref } from 'vue';
 import ButtonDefault from '@/components/utils/forms/ButtonDefault.vue';
 import LinkDefault from '@/components/utils/forms/LinkDefault.vue';
+import { useAuthStore } from "@/stores/authStore";
+import router from '@/router';
 
 const $q = useQuasar()
+const authStore = useAuthStore();
 
-const email = ref(null)
-const password = ref(null)
+const email = ref("")
+const password = ref("")
+const errorMessage = ref("");
 
-function onSubmit() {
-    if (email.value !== true) {
-        $q.notify({
-            color: 'red-5',
-            textColor: 'white',
-            icon: 'warning',
-            message: 'You need to accept the license and terms first'
-        })
-    }
-    else {
-        $q.notify({
-            color: 'green-4',
-            textColor: 'white',
-            icon: 'cloud_done',
-            message: 'Submitted'
-        })
+const login = async () => {
+    try {
+        const response = await authStore.login({ email: email.value, password: password.value });
+        if (response) {
+            router.push({ name: 'tasks.list' })
+        }
+    } catch (error) {
+        errorMessage.value = "Falha no login. Verifique suas credenciais.";
     }
 };
-
-function onReset() {
-    email.value = null;
-    password.value = null;
-};
-
-
-function teste(): void {
-    return console.log('teste');
-}
 
 </script>
 
@@ -51,7 +37,7 @@ function teste(): void {
                 <img src="@/assets/gif-animado-mascote-quindim.gif" alt="Mascote Quindim" id="mascote" />
             </div>
             <div class="w-full">
-                <q-form class="q-gutter-md">
+                <div class="q-gutter-md">
                     <q-input class="bg-white rounded-default" v-model="email" type="text" filled label="Email"
                         lazy-rules />
                     <q-input class="bg-white rounded-default" v-model="password" type="password" filled label="Password"
@@ -60,11 +46,11 @@ function teste(): void {
                         <LinkDefault href="https://www.google.com" class="md:text-xl text-sm">
                             <span>Esqueceu a senha?</span>
                         </LinkDefault>
-                        <ButtonDefault clazz="bg-tertiary-003 hover:bg-tertiary-005 ubuntu-bold" :btnonclick="teste">
+                        <ButtonDefault clazz="bg-tertiary-003 hover:bg-tertiary-005 ubuntu-bold" @click="login()">
                             <span class="ubuntu-bold text-auxiliary-main-008 md:text-xl text-sm w-20">Login</span>
                         </ButtonDefault>
                     </div>
-                </q-form>
+                </div>
             </div>
         </div>
     </div>
