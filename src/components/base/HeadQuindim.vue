@@ -20,6 +20,9 @@ const authStore = useAuthStore()
                             <q-item-section @click="router.push({ name: 'task-status.list' })">Status de
                                 Tarefa</q-item-section>
                         </q-item>
+                        <q-item clickable v-close-popup>
+                            <q-item-section @click="authStore.logout()">Logout</q-item-section>
+                        </q-item>
                     </q-list>
                 </q-menu>
             </q-btn>

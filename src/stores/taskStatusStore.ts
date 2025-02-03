@@ -10,8 +10,6 @@ export const useTaskStatusStore = defineStore('task_status', {
   }),
   actions: {
     async fetchTaskStatuses(): Promise<TaskStatus[]> {
-      if (this.task_statuses.length > 0) return this.task_statuses
-
       this.isLoading = true
 
       try {

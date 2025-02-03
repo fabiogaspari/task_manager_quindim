@@ -4,6 +4,7 @@ import type LoginPayload from '@/models/payloads/LoginPayload'
 import type UserResponse from '@/models/responses/UserResponse'
 import { ref } from 'vue'
 import { jwtDecode } from 'jwt-decode'
+import router from '@/router'
 
 export const useAuthStore = defineStore(
   'auth',
@@ -36,6 +37,7 @@ export const useAuthStore = defineStore(
         user.value = null
         token.value = null
         isAuthenticated.value = false
+        router.push({ name: 'login' })
       } catch (error) {
         console.error('Erro ao fazer login:', error)
         throw error
