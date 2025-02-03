@@ -2,6 +2,7 @@
 import HeadQuindim from '@/components/base/HeadQuindim.vue';
 import FooterQuindim from '@/components/base/FooterQuindim.vue';
 import BodyQuindim from '@/components/base/BodyQuindim.vue';
+import ModalDefault from './components/utils/modals/ModalDefault.vue';
 </script>
 
 <template>

@@ -7,13 +7,15 @@ import Task from '@/models/Task';
 import { onMounted, ref } from 'vue';
 import TaskStatus from '@/models/TaskStatus';
 import { toRaw } from 'vue';
-import ResponseUtil from '@/utils/ResponseUtil';
+import ModalDefault from '@/components/utils/modals/ModalDefault.vue';
 
 const taskStatusStore = useTaskStatusStore();
 const title = ref<string>('');
 const status = ref<TaskStatus | null>(null);
 const expirationDate = ref<String | null>(null);
 const listStatus = ref<TaskStatus[]>([]);
+const showInfo = ref(false)
+const message = ref("")
 
 onMounted(() => {
     taskStatusStore.fetchTaskStatuses().then((res) => {
@@ -35,11 +37,17 @@ const save = async () => {
         expirationDate.value ? expirationDate.value.split("/").join("-") : null
     );
 
-    const response = await TaskService.create(task);
+    TaskService.create(task).then((res) => {
+        message.value = res.msg
+        showInfo.value = true
+    })
 };
 </script>
 
 <template>
+    <ModalDefault v-model:alert="showInfo">
+        <span>{{ message }}</span>
+    </ModalDefault>
     <LoadingDefault :isLoading="taskStatusStore.isLoading"></LoadingDefault>
     <div class="flex flex-grow">
         <div class="flex justify-center content-start w-full h-full q-gutter-sm">

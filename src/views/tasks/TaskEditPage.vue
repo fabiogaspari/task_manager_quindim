@@ -8,6 +8,7 @@ import { onMounted, ref } from 'vue';
 import TaskStatus from '@/models/TaskStatus';
 import { toRaw } from 'vue';
 import { useRoute } from 'vue-router';
+import ModalDefault from '@/components/utils/modals/ModalDefault.vue';
 
 const route = useRoute();
 const id: string | string[] = route.params.id;
@@ -17,6 +18,8 @@ const task = ref<Task>()
 const title = ref('')
 const status = ref<TaskStatus | null>(null)
 const expirationDate = ref<String | null>(null);
+const showInfo = ref(false)
+const message = ref("")
 
 onMounted(async () => {
     try {
@@ -53,7 +56,10 @@ const save = async () => {
             updatedTask._id = task.value._id
         }
 
-        const response = await TaskService.update(id.toString(), updatedTask)
+        TaskService.update(id.toString(), updatedTask).then((res) => {
+            message.value = res.msg
+            showInfo.value = true
+        })
     } catch (error) {
         console.error('Erro ao salvar tarefa:', error)
     }
@@ -61,7 +67,9 @@ const save = async () => {
 </script>
 
 <template>
-    <LoadingDefault :isLoading="taskStatusStore.isLoading"></LoadingDefault>
+    <ModalDefault v-model:alert="showInfo">
+        <span>{{ message }}</span>
+    </ModalDefault>
     <div class="flex flex-grow">
         <div class="flex justify-center content-start w-full h-full q-gutter-sm">
             <div class="flex justify-between w-full">

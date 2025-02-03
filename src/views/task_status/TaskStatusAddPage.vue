@@ -2,16 +2,18 @@
 import CardDefault from '@/components/utils/cards/CardDefault.vue';
 import ButtonDefault from '@/components/utils/forms/ButtonDefault.vue';
 import { ref } from 'vue';
-import ResponseUtil from '@/utils/ResponseUtil';
 import status_colors from '@/models/fixed/status_colors'
 import status_color_fonts from '@/models/fixed/status_color_fonts'
 import TaskStatus from '@/models/TaskStatus';
 import TaskStatusService from '@/services/TaskStatusService';
+import ModalDefault from '@/components/utils/modals/ModalDefault.vue';
 
 const name = ref('')
 const status_color = ref({ id: '', desc: '' })
 const status_color_font = ref({ id: '', desc: '' })
 const description = ref('')
+const showInfo = ref(false)
+const message = ref("")
 
 const save = async () => {
     const taskStatus: TaskStatus = new TaskStatus(
@@ -21,13 +23,18 @@ const save = async () => {
         description.value
     );
 
-    const response = await TaskStatusService.create(taskStatus);
-
+    TaskStatusService.create(taskStatus).then((res) => {
+        message.value = res.msg
+        showInfo.value = true
+    })
 };
 </script>
 
 <template>
     <div class="flex flex-grow">
+        <ModalDefault v-model:alert="showInfo">
+            <span>{{ message }}</span>
+        </ModalDefault>
         <div class="flex justify-center content-start w-full h-full q-gutter-sm">
             <div class="flex justify-between w-full">
                 <span class="text-white ubuntu-bold md:text-5xl text-lg">Adicionar Status das Tarefas</span>

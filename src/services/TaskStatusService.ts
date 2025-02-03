@@ -1,3 +1,5 @@
+import type CreateResponse from '@/models/responses/CreateResponse'
+import type DefaultResponse from '@/models/responses/DefaultResponse'
 import TaskStatus from '@/models/TaskStatus'
 import api from '@/services/api'
 
@@ -22,9 +24,9 @@ export default class TaskStatusService {
     }
   }
 
-  static async create(taskStatusData: TaskStatus): Promise<TaskStatus> {
+  static async create(taskStatusData: TaskStatus): Promise<CreateResponse> {
     try {
-      const response = await api.post<TaskStatus>('/task_statuses/create', taskStatusData)
+      const response = await api.post<CreateResponse>('/task_statuses/create', taskStatusData)
       return response.data
     } catch (error) {
       console.error('Erro ao criar o status da tarefa:', error)
@@ -35,9 +37,12 @@ export default class TaskStatusService {
   static async update(
     taskStatusId: string,
     taskStatusData: Partial<TaskStatus>,
-  ): Promise<TaskStatus> {
+  ): Promise<DefaultResponse> {
     try {
-      const response = await api.put<TaskStatus>(`/task_statuses/${taskStatusId}`, taskStatusData)
+      const response = await api.put<DefaultResponse>(
+        `/task_statuses/${taskStatusId}`,
+        taskStatusData,
+      )
       return response.data
     } catch (error) {
       console.error('Erro ao atualizar o status da tarefa:', error)

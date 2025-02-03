@@ -8,6 +8,7 @@ import status_color_fonts from '@/models/fixed/status_color_fonts'
 import TaskStatusService from '@/services/TaskStatusService';
 import { useRoute } from 'vue-router';
 import TaskStatus from '@/models/TaskStatus';
+import ModalDefault from '@/components/utils/modals/ModalDefault.vue';
 
 const route = useRoute();
 const id: string | string[] = route.params.id;
@@ -16,6 +17,8 @@ const name = ref('')
 const status_color = ref({ id: '', desc: '' })
 const status_color_font = ref({ id: '', desc: '' })
 const description = ref('')
+const showInfo = ref(false)
+const message = ref("")
 
 onMounted(async () => {
     try {
@@ -49,7 +52,10 @@ const save = async () => {
             updatedTask._id = status.value._id
         }
 
-        const response = await TaskStatusService.update(id.toString(), updatedTask)
+        TaskStatusService.update(id.toString(), updatedTask).then((res) => {
+            message.value = res.msg
+            showInfo.value = true
+        })
 
 
     } catch (error) {
@@ -60,6 +66,9 @@ const save = async () => {
 
 <template>
     <div class="flex flex-grow">
+        <ModalDefault v-model:alert="showInfo">
+            <span>{{ message }}</span>
+        </ModalDefault>
         <div class="flex justify-center content-start w-full h-full q-gutter-sm">
             <div class="flex justify-between w-full">
                 <span class="text-white ubuntu-bold md:text-5xl text-lg">Editar Status das Tarefas</span>
