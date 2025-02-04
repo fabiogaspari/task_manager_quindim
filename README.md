@@ -1,4 +1,4 @@
-8# Gerenciador de Tarefas Quindim (frontend)
+Gerenciador de Tarefas Quindim (frontend)
 Para esse microserviço do frontend, foram utilizadas as tecnologias Vue3 com Vite e Pinia.
 
 # Para rodar o projeto
